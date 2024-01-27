@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RandomUser</string>
+    <string name="hi_my_name_is_miss_marie_gregory">Hi, My name is Miss Marie Gregory</string>
+    <string name="my_email_address_is_marie_gregory_example_com">My email address is marie.gregory@example.com</string>
+    <string name="my_birthday_is_12_2_1958">My birthday is 12/2/1958</string>
+    <string name="my_address_is_501_camden_ave">My address is 501 Camden Ave</string>
+    <string name="my_phone_number_is_251_861_5330">My phone number is (251) 861-5330</string>
+    <string name="my_password_is_market">My password is market</string>
 </resources>

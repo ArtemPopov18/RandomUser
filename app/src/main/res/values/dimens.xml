@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mini_avatar_size">128dp</dimen>
+    <dimen name="margin_horizontal_card">8dp</dimen>
+    <dimen name="margin_vertical_card">12dp</dimen>
+</resources>

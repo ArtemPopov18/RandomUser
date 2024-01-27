@@ -50,6 +50,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    // fragment https://developer.android.com/jetpack/androidx/releases/fragment
+    val fragment_version = "1.6.2"
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+
     // Retrofit https://github.com/square/retrofit
     val retrofit_version = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
