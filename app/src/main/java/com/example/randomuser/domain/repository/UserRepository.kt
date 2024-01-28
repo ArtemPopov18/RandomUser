@@ -5,5 +5,5 @@ import com.example.randomuser.data.model.Result
 import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
-    fun getUsers() : Flow<PagingData<Result>>
+    fun getUsers(): Flow<PagingData<Result>>
 }

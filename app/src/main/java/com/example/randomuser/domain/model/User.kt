@@ -10,7 +10,7 @@ data class User(
     val name: Name,
 )
 
-data class Name (
+data class Name(
     val first: String,
     val last: String,
     val title: String
