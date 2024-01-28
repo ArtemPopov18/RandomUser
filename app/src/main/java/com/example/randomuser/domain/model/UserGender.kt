@@ -6,7 +6,7 @@ enum class UserGender {
 
 fun getUserGenderEnum(gender: String) =
     when (gender) {
-        "famele" -> UserGender.FEMALE
+        "female" -> UserGender.FEMALE
         "male" -> UserGender.MALE
         else -> UserGender.UNKNOWN
     }

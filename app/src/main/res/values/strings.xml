@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">RandomUser</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="unknown">Unknown</string>
     <string name="hi_my_name_is_miss_marie_gregory">Hi, My name is Miss Marie Gregory</string>
     <string name="my_email_address_is_marie_gregory_example_com">My email address is marie.gregory@example.com</string>
     <string name="my_birthday_is_12_2_1958">My birthday is 12/2/1958</string>
