@@ -72,4 +72,9 @@ dependencies {
     // Coil https://coil-kt.github.io/coil/
     val coil_version = "2.5.0"
     implementation("io.coil-kt:coil:$coil_version")
+
+    // https://developer.android.com/topic/libraries/architecture/paging/v3-overview
+
+    val paging_version = "3.2.1"
+    implementation("androidx.paging:paging-runtime:$paging_version")
 }
