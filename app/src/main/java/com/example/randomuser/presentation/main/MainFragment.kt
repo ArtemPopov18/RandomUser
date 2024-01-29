@@ -10,6 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.randomuser.R
 import com.example.randomuser.databinding.FragmentMainBinding
 import com.example.randomuser.presentation.UsersAdapter
 import com.example.randomuser.presentation.details.DetailsFragment
@@ -40,6 +41,14 @@ class MainFragment : Fragment() {
 
         initAdapter()
 
+        usersAdapter.setOnItemClickListener {
+            val detailsFragment = DetailsFragment.newInstance(it)
+            requireActivity().supportFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, detailsFragment)
+                .addToBackStack(detailsFragment.javaClass.simpleName)
+                .commit()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.user.collectLatest {
@@ -47,12 +56,6 @@ class MainFragment : Fragment() {
                 }
             }
         }
-
-//            val detailsFragment = DetailsFragment.newInstance("ПЕРЕДАЙ ОБЪЕКТ МОДЕЛИ")
-//            requireActivity().supportFragmentManager.beginTransaction()
-//                .add(R.id.fragment_container, detailsFragment)
-//                .addToBackStack(detailsFragment.javaClass.simpleName)
-//                .commit()
     }
 
     override fun onDestroyView() {

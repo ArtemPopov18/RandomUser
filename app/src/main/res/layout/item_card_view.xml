@@ -43,7 +43,7 @@
             android:maxLines="2"
             android:text=""
             app:layout_constraintBottom_toTopOf="@id/text_phone_number"
-            app:layout_constraintEnd_toEndOf="@id/text_name"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/text_name"
             app:layout_constraintTop_toBottomOf="@id/text_name"
             tools:text="@tools:sample/cities" />

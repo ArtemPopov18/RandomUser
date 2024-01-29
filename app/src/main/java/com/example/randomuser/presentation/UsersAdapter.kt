@@ -23,6 +23,12 @@ class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.Holder>(UsersDiffCal
             textAddress.text = user.getLocation()
             textPhoneNumber.text = user.phone
             imagePhoto.load(user.picture?.medium)
+
+            root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(user)
+                }
+            }
         }
     }
 
@@ -32,6 +38,11 @@ class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.Holder>(UsersDiffCal
         return Holder(binding)
     }
 
+    private var onItemClickListener: ((UserUI) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (UserUI) -> Unit) {
+        onItemClickListener = listener
+    }
 
 }
 

@@ -1,5 +1,7 @@
 package com.example.randomuser.presentation.model
 
+import java.io.Serializable
+
 data class UserUI(
     val dob: DobUI?,
     val email: String?,
@@ -9,7 +11,7 @@ data class UserUI(
     val picture: PictureUI?,
     private val location: LocationUI?,
     private val name: NameUI?,
-) {
+) : Serializable {
     fun getUserName() = "Hi, My name is ${name?.title}. ${name?.first} ${name?.last}"
 
     fun getColorTextName() = gender?.color
