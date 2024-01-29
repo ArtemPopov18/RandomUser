@@ -14,18 +14,19 @@ import javax.inject.Inject
 class UserUIMapper @Inject constructor() : Mapper<User, UserUI>() {
     override fun map(from: User) = from.run {
         UserUI(
-            dob = DobUI(dob.age, dob.date),
+            dob = DobUI(dob?.age, dob?.date),
             email = email,
-            gender = gender.convertToUI(),
+            gender = gender?.convertToUI(),
+            id = id,
             phone = phone,
-            picture = PictureUI(picture.large, picture.medium),
+            picture = PictureUI(picture?.large, picture?.medium),
             location = LocationUI(
-                location.city,
-                location.country,
-                location.state,
-                StreetUI(location.street.name, location.street.number)
+                location?.city,
+                location?.country,
+                location?.state,
+                StreetUI(location?.street?.name, location?.street?.number)
             ),
-            name = NameUI(name.first, name.last, name.title)
+            name = NameUI(name?.first, name?.last, name?.title)
         )
     }
 }

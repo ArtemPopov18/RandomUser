@@ -1,7 +1,6 @@
 package com.example.randomuser.presentation.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.randomuser.R
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.randomuser.databinding.FragmentMainBinding
+import com.example.randomuser.presentation.UsersAdapter
 import com.example.randomuser.presentation.details.DetailsFragment
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,6 +24,7 @@ class MainFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel by viewModels<ManeViewModel>()
+    private lateinit var usersAdapter: UsersAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,14 +38,15 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED){
-                    viewModel.user.collect{
-                        Log.d("wdw", "${it}")
-                    }
+        initAdapter()
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.user.collectLatest {
+                    usersAdapter.submitData(it)
                 }
             }
-
+        }
 
 //            val detailsFragment = DetailsFragment.newInstance("ПЕРЕДАЙ ОБЪЕКТ МОДЕЛИ")
 //            requireActivity().supportFragmentManager.beginTransaction()
@@ -55,5 +58,13 @@ class MainFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun initAdapter() {
+        usersAdapter = UsersAdapter()
+        binding.userAdapter.apply {
+            adapter = usersAdapter
+            layoutManager = LinearLayoutManager(activity)
+        }
     }
 }

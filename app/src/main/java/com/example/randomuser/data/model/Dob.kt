@@ -1,6 +1,8 @@
 package com.example.randomuser.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Dob(
-    val age: Int,
-    val date: String
+    @SerializedName("date") var date: String? = null,
+    @SerializedName("age") var age: Int? = null
 )

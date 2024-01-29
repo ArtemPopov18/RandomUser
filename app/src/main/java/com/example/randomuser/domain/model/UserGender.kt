@@ -4,7 +4,7 @@ enum class UserGender {
     FEMALE, MALE, UNKNOWN
 }
 
-fun getUserGenderEnum(gender: String) =
+fun getUserGenderEnum(gender: String?) =
     when (gender) {
         "female" -> UserGender.FEMALE
         "male" -> UserGender.MALE

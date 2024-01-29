@@ -1,5 +1,6 @@
 package com.example.randomuser.data.datasource
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.randomuser.data.model.Result
@@ -18,9 +19,8 @@ class UserPagingDataSource @Inject constructor(private val service: UsersService
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Result> {
         return try {
-            val pageNumber = params.key ?: 1
+            val pageNumber = params.key ?: 2
             val response = service.getUsers(pageNumber)
-
             if (response.isSuccessful) {
                 val pageResponse = response.body()
                 val data = pageResponse?.results
@@ -36,7 +36,9 @@ class UserPagingDataSource @Inject constructor(private val service: UsersService
                 LoadResult.Error(HttpException(response))
             }
         } catch (e: Exception) {
-            LoadResult.Error(e)
+            throw e
+//            Log.d("logMy", "${e.message}")
+//            LoadResult.Error(e)
         }
     }
 }

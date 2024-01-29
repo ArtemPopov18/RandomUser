@@ -1,6 +1,8 @@
 package com.example.randomuser.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Timezone(
-    val description: String,
-    val offset: String
+    @SerializedName("offset") var offset: String? = null,
+    @SerializedName("description") var description: String? = null
 )

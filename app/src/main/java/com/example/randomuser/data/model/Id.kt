@@ -1,6 +1,10 @@
 package com.example.randomuser.data.model
 
+import com.google.gson.annotations.SerializedName
+
 data class Id(
-    val name: String,
-    val value: String
+    @SerializedName("name")
+    val name: String? = null,
+    @SerializedName("value")
+    val value: String? = null
 )

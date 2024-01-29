@@ -50,6 +50,8 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+
     // fragment https://developer.android.com/jetpack/androidx/releases/fragment
     val fragment_version = "1.6.2"
     implementation("androidx.fragment:fragment-ktx:$fragment_version")
@@ -62,7 +64,8 @@ dependencies {
     // Coroutine Lifecycle Scopes https://developer.android.com/kotlin/ktx
     val lifecycleVersion = "2.7.0"
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion")
-    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion")
+    implementation("androidx.activity:activity-ktx:1.8.2")
 
     // Hilt https://developer.android.com/training/dependency-injection/hilt-android
     val hilt_version = "2.48.1"
@@ -76,4 +79,8 @@ dependencies {
     // https://developer.android.com/topic/libraries/architecture/paging/v3-overview
     val paging_version = "3.2.1"
     implementation("androidx.paging:paging-runtime:$paging_version")
+
+    // OkHTTP https://square.github.io/okhttp/
+    val okhttpVersion = "4.12.0"
+    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
 }
