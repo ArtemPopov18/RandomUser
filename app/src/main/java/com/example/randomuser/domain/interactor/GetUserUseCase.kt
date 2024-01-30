@@ -1,5 +1,6 @@
 package com.example.randomuser.domain.interactor
 
+import android.util.Log
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.example.randomuser.data.model.Result

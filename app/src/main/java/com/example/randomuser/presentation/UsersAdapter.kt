@@ -35,6 +35,9 @@ class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.Holder>(UsersDiffCal
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = ItemCardViewBinding.inflate(inflater, parent, false)
+
+//        binding.root.
+
         return Holder(binding)
     }
 
@@ -43,7 +46,6 @@ class UsersAdapter : PagingDataAdapter<UserUI, UsersAdapter.Holder>(UsersDiffCal
     fun setOnItemClickListener(listener: (UserUI) -> Unit) {
         onItemClickListener = listener
     }
-
 }
 
 class UsersDiffCallback : DiffUtil.ItemCallback<UserUI>() {
@@ -52,6 +54,6 @@ class UsersDiffCallback : DiffUtil.ItemCallback<UserUI>() {
     }
 
     override fun areContentsTheSame(oldItem: UserUI, newItem: UserUI): Boolean {
-        return oldItem.id == newItem.id
+        return oldItem == newItem
     }
 }

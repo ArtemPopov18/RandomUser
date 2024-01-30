@@ -12,16 +12,14 @@ import com.example.randomuser.domain.model.User
 import com.example.randomuser.presentation.model.UserUI
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ManeViewModel @Inject constructor(
+class MainViewModel @Inject constructor(
     getUserUseCase: GetUserUseCase,
     private val mapper: Mapper<User, UserUI>
 ) : ViewModel() {

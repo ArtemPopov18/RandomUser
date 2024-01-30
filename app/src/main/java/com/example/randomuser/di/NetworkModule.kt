@@ -22,17 +22,16 @@ object NetworkModule {
         .setLevel(HttpLoggingInterceptor.Level.BODY)
 
     @Provides
-    fun okHttpClient() = OkHttpClient.Builder()
+    fun okHttpClient(logging : HttpLoggingInterceptor) = OkHttpClient.Builder()
         .addInterceptor(logging())
         .build()
 
-
     @Singleton
     @Provides
-    fun provideRetrofit(baseURl: String): Retrofit =
+    fun provideRetrofit(baseURl: String, okHttpClient: OkHttpClient, logging: HttpLoggingInterceptor): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(baseURl)
-            .client(okHttpClient())
+            .client(okHttpClient(logging))
             .build()
 }

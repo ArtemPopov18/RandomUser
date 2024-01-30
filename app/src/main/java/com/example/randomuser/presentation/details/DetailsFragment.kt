@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import coil.load
 import com.example.randomuser.databinding.FragmentDetailsBinding
 import com.example.randomuser.presentation.model.UserUI
@@ -23,13 +24,10 @@ class DetailsFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userUI = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            requireArguments().getSerializable(KEY, UserUI::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < TIRAMISU")
-        }
+        val userUI = requireArguments().getSerializable(KEY, UserUI::class.java)
 
         with(binding) {
             imagePhoto.load(userUI?.picture?.large)
@@ -41,7 +39,6 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    //Todo задать value типо модели
     companion object {
         private const val KEY = "DETAILS"
 
