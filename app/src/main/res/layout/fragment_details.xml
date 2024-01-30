@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".presentation.details.DetailsFragment">
+
+    <ImageView
+        android:id="@+id/image_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="6"
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/text_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/hi_my_name_is_miss_marie_gregory" />
+
+    <TextView
+        android:id="@+id/text_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/my_email_address_is_marie_gregory_example_com" />
+
+    <TextView
+        android:id="@+id/text_birthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/my_birthday_is_12_2_1958" />
+
+    <TextView
+        android:id="@+id/text_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/my_address_is_501_camden_ave" />
+
+    <TextView
+        android:id="@+id/text_phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/my_phone_number_is_251_861_5330" />
+
+    <TextView
+        android:id="@+id/text_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text=""
+        android:textColor="@color/black"
+        tools:text="@string/my_password_is_market" />
+</LinearLayout>
