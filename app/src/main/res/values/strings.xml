@@ -9,4 +9,6 @@
     <string name="my_address_is_501_camden_ave">My address is 501 Camden Ave</string>
     <string name="my_phone_number_is_251_861_5330">My phone number is (251) 861-5330</string>
     <string name="my_password_is_market">My password is market</string>
+    <string name="try_again_error">Restart</string>
+    <string name="text_error">Error</string>
 </resources>

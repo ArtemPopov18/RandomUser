@@ -1,13 +1,11 @@
-package com.example.randomuser.presentation
+package com.example.randomuser.presentation.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.randomuser.R
 import com.example.randomuser.databinding.ItemCardViewBinding
 import com.example.randomuser.presentation.model.UserUI
 
