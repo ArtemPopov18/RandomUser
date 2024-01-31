@@ -3,6 +3,7 @@ package com.example.randomuser.domain.mapper
 import android.util.Log
 import com.example.randomuser.data.model.Result
 import com.example.randomuser.domain.mapper.base.Mapper
+import com.example.randomuser.domain.model.Coordinates
 import com.example.randomuser.domain.model.Dob
 import com.example.randomuser.domain.model.Location
 import com.example.randomuser.domain.model.Name
@@ -25,7 +26,8 @@ class UserMapper @Inject constructor() : Mapper<Result, User>() {
                 location?.city,
                 location?.country,
                 location?.state,
-                Street(location?.street?.name, location?.street?.number)
+                Street(location?.street?.name, location?.street?.number),
+                Coordinates(location?.coordinates?.latitude, location?.coordinates?.longitude)
             ),
             name = Name(name?.first, name?.last, name?.title)
         )

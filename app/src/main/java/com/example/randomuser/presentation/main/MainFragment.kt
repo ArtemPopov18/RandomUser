@@ -1,7 +1,6 @@
 package com.example.randomuser.presentation.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +9,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.randomuser.R
 import com.example.randomuser.databinding.FragmentMainBinding
-import com.example.randomuser.presentation.UsersAdapter
-import com.example.randomuser.presentation.details.DetailsFragment
+import com.example.randomuser.presentation.adapter.TryAgain
+import com.example.randomuser.presentation.adapter.UserLoaderStateAdapter
+import com.example.randomuser.presentation.adapter.UsersAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -27,6 +27,8 @@ class MainFragment : Fragment() {
 
     private val viewModel by viewModels<MainViewModel>()
     private lateinit var usersAdapter: UsersAdapter
+    private lateinit var tryAgain: TryAgain
+    private lateinit var userLoaderStateAdapter: UserLoaderStateAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +44,8 @@ class MainFragment : Fragment() {
         initAdapter()
 
         usersAdapter.setOnItemClickListener {
-            val detailsFragment = DetailsFragment.newInstance(it)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, detailsFragment)
-                .addToBackStack(detailsFragment.javaClass.simpleName)
-                .commit()
+            val args = MainFragmentDirections.actionMainFragmentToDetailsFragment(it)
+            view.findNavController().navigate(args)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -59,16 +58,19 @@ class MainFragment : Fragment() {
         }
     }
 
+    private fun initAdapter() {
+        usersAdapter = UsersAdapter()
+        tryAgain = { usersAdapter.retry()}
+        userLoaderStateAdapter = UserLoaderStateAdapter(tryAgain)
+        val adapterWithLoadState = usersAdapter.withLoadStateFooter(userLoaderStateAdapter)
+        binding.userAdapter.apply {
+            adapter = adapterWithLoadState
+            layoutManager = LinearLayoutManager(activity)
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun initAdapter() {
-        usersAdapter = UsersAdapter()
-        binding.userAdapter.apply {
-            adapter = usersAdapter
-            layoutManager = LinearLayoutManager(activity)
-        }
     }
 }

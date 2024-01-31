@@ -2,6 +2,7 @@ package com.example.randomuser.presentation.mapper
 
 import com.example.randomuser.domain.mapper.base.Mapper
 import com.example.randomuser.domain.model.User
+import com.example.randomuser.presentation.model.CoordinatesUI
 import com.example.randomuser.presentation.model.DobUI
 import com.example.randomuser.presentation.model.LocationUI
 import com.example.randomuser.presentation.model.NameUI
@@ -24,7 +25,8 @@ class UserUIMapper @Inject constructor() : Mapper<User, UserUI>() {
                 location?.city,
                 location?.country,
                 location?.state,
-                StreetUI(location?.street?.name, location?.street?.number)
+                StreetUI(location?.street?.name, location?.street?.number),
+                CoordinatesUI(location?.coordinates?.latitude, location?.coordinates?.longitude)
             ),
             name = NameUI(name?.first, name?.last, name?.title)
         )
