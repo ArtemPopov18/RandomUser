@@ -1,5 +1,6 @@
 package com.example.randomuser.presentation.model
 
+import android.net.Uri
 import java.io.Serializable
 
 data class UserUI(
@@ -16,7 +17,10 @@ data class UserUI(
 
     fun getColorTextName() = gender?.color
 
-    fun getLocation() = "${location?.country} - ${location?.state} - ${location?.city} - \n${location?.street?.name} - ${location?.street?.number}"
+    fun getLocation() =
+        "${location?.country} - ${location?.state} - ${location?.city} - \n${location?.street?.name} - ${location?.street?.number}"
+
+    val geoLocation: Uri = Uri.parse("geo:${location?.coordinates?.latitude},${location?.coordinates?.longitude}")
 }
 
 data class DobUI(
@@ -34,6 +38,12 @@ data class LocationUI(
     val country: String?,
     val state: String?,
     val street: StreetUI?,
+    val coordinates: CoordinatesUI?,
+)
+
+data class CoordinatesUI(
+    val latitude: String?,
+    val longitude: String?,
 )
 
 data class StreetUI(

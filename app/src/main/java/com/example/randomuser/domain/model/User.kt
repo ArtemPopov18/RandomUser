@@ -22,6 +22,12 @@ data class Location(
     val country: String?,
     val state: String?,
     val street: Street?,
+    val coordinates: Coordinates?
+)
+
+data class Coordinates(
+    val latitude: String?,
+    val longitude: String?,
 )
 
 data class Street(
