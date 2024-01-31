@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -83,4 +84,9 @@ dependencies {
     // OkHTTP https://square.github.io/okhttp/
     val okhttpVersion = "4.12.0"
     implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+
+    // Navigation Components https://developer.android.com/jetpack/androidx/releases/navigation
+    val navVersion = "2.7.6"
+    implementation ("androidx.navigation:navigation-fragment-ktx:$navVersion")
+    implementation ("androidx.navigation:navigation-ui-ktx:$navVersion")
 }
