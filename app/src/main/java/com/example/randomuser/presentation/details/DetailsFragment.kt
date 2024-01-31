@@ -13,14 +13,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
+import androidx.fragment.app.viewModels
 import coil.load
 import com.example.randomuser.databinding.FragmentDetailsBinding
+import com.example.randomuser.presentation.base.BaseScreen
 import com.example.randomuser.presentation.model.UserUI
+import dagger.hilt.android.AndroidEntryPoint
 
 class DetailsFragment : Fragment() {
 
+    class Screen(
+        val initialUser : UserUI
+    ) : BaseScreen
+
     private var _binding: FragmentDetailsBinding? = null
     private val binding get() = _binding!!
+
+    private val viewModel by viewModels<DetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,28 +42,53 @@ class DetailsFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val userUI = requireArguments().getSerializable(KEY, UserUI::class.java)
+        val userUI1 = requireArguments().getSerializable(KEY, UserUI::class.java)
 
-        with(binding) {
-            imagePhoto.load(userUI?.picture?.large)
-            textName.text = userUI?.getUserName() ?: ""
-            textEmail.text = userUI?.email ?: ""
-            textBirthday.text = userUI?.dob?.date ?: ""
-            textAddress.text = userUI?.getLocation() ?: ""
-            textPhoneNumber.text = userUI?.phone
+        viewModel.initialUserEvent.observe(viewLifecycleOwner){
+            it.getValue()?.let { userUi ->
+                with(binding){
+                    imagePhoto.load(userUi.picture?.large)
+                    textName.text = userUi.getUserName()
+                    textEmail.text = userUi.email
+                    textBirthday.text = userUi.dob?.date
+                    textAddress.text = userUi.getLocation()
+                    textPhoneNumber.text = userUi.phone
 
-            textEmail.setOnClickListener {
-                composeEmail(arrayOf(textEmail.text.toString()))
-            }
+                    textEmail.setOnClickListener {
+                        composeEmail(arrayOf(textEmail.text.toString()))
+                    }
 
-            textPhoneNumber.setOnClickListener {
-                checkPermissions(textPhoneNumber.text.toString())
-            }
+                    textPhoneNumber.setOnClickListener {
+                        checkPermissions(textPhoneNumber.text.toString())
+                    }
 
-            textAddress.setOnClickListener {
-                showMap(userUI?.geoLocation)
+                    textAddress.setOnClickListener {
+                        showMap(userUi.geoLocation)
+                    }
+                }
             }
         }
+
+//        with(binding) {
+//            imagePhoto.load(userUI?.picture?.large)
+//            textName.text = userUI?.getUserName() ?: ""
+//            textEmail.text = userUI?.email ?: ""
+//            textBirthday.text = userUI?.dob?.date ?: ""
+//            textAddress.text = userUI?.getLocation() ?: ""
+//            textPhoneNumber.text = userUI?.phone
+//
+//            textEmail.setOnClickListener {
+//                composeEmail(arrayOf(textEmail.text.toString()))
+//            }
+//
+//            textPhoneNumber.setOnClickListener {
+//                checkPermissions(textPhoneNumber.text.toString())
+//            }
+//
+//            textAddress.setOnClickListener {
+//                showMap(userUI?.geoLocation)
+//            }
+//        }
     }
 
     fun composeEmail(addresses: Array<String>) {
@@ -85,11 +119,19 @@ class DetailsFragment : Fragment() {
         }
     }
 
-    private fun checkPermissions(phoneNumber: String){
-        if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+    private fun checkPermissions(phoneNumber: String) {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CALL_PHONE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
             dialPhoneNumber(phoneNumber)
         } else {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CALL_PHONE), PHONE_CALL)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.CALL_PHONE),
+                PHONE_CALL
+            )
         }
     }
 

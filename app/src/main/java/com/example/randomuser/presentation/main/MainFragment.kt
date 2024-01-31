@@ -14,19 +14,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.randomuser.R
 import com.example.randomuser.databinding.FragmentMainBinding
 import com.example.randomuser.presentation.UsersAdapter
+import com.example.randomuser.presentation.base.BaseFragment
+import com.example.randomuser.presentation.base.BaseScreen
+import com.example.randomuser.presentation.base.BaseViewModel
+import com.example.randomuser.presentation.base.screenViewModel
 import com.example.randomuser.presentation.details.DetailsFragment
+import dagger.Binds
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
+
+    @Binds
+    class Screen : BaseScreen
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel by viewModels<MainViewModel>()
+//    private val viewModel by viewModels<MainViewModel>()
     private lateinit var usersAdapter: UsersAdapter
+    override val viewModel by screenViewModel<MainViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,17 +51,18 @@ class MainFragment : Fragment() {
         initAdapter()
 
         usersAdapter.setOnItemClickListener {
-            val detailsFragment = DetailsFragment.newInstance(it)
-            requireActivity().supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, detailsFragment)
-                .addToBackStack(detailsFragment.javaClass.simpleName)
-                .commit()
+//            val detailsFragment = DetailsFragment.newInstance(it)
+//            requireActivity().supportFragmentManager.beginTransaction()
+//                .add(R.id.fragment_container, detailsFragment)
+//                .addToBackStack(detailsFragment.javaClass.simpleName)
+//                .commit()
+
+            viewModel.onClickItem(it)
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.user.collectLatest {
-
                     usersAdapter.submitData(it)
                 }
             }
